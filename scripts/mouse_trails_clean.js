@@ -1,3 +1,4 @@
+
 A=document.getElementById
 B=document.all;
 C=document.layers;
@@ -93,4 +94,3 @@ if(document.layers)
 document.captureEvents(Event.MOUSEMOVE)
 document.onmousemove=newPos
 setInterval("cycle()",rate)
-</script>
