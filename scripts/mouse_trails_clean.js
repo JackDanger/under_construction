@@ -42,6 +42,8 @@ var MouseTrails = function(){
       })
       .find("span")
         .html("x: "+x+", y: "+y)
+
+    // delay setting the next sprite location
     setTimeout(function(){
       if(sprite[0].firstChild){
         adjustSprites(
