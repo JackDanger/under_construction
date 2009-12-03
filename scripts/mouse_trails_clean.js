@@ -1,7 +1,13 @@
 var MouseTrails = function(){
   var spriteCount = 5
-  var offsetX = 10,
-      offsetY = 8
+  var offsetX   = 10,
+      offsetY   = 8,
+      delay     = 15,
+      interval  = 150
+      shouldAdjust = false
+
+  // periodically trigger the need for an update
+  setInterval(function(){ shouldAdjust = true}, interval)
 
   // build elements
   var createSprites = function(parent, numLeft){
@@ -36,18 +42,22 @@ var MouseTrails = function(){
       })
       .find("span")
         .html("x: "+x+", y: "+y)
-
-    if(sprite[0].firstChild){
-      adjustSprites(
-        x + offsetX+20,
-        y + offsetY+30,
-        $(sprite[0].firstChild)
-      )
-    }
+    setTimeout(function(){
+      if(sprite[0].firstChild){
+        adjustSprites(
+          x + offsetX+20,
+          y + offsetY+30,
+          $(sprite[0].firstChild)
+        )
+      }
+    }, delay)
   }
 
   $('body').mousemove(function(e){
-    adjustSprites(e.pageX,e.pageY)
+    if(shouldAdjust){
+      shouldAdjust = false
+      adjustSprites(e.pageX,e.pageY)
+    }
   })
 }
 
