@@ -1,9 +1,9 @@
 var MouseTrails = function(){
   var spriteCount = 5
-  var offsetX   = 10,
-      offsetY   = 8,
-      delay     = 15,
-      interval  = 150
+  var offsetX   = 30,
+      offsetY   = 15,
+      delay     = 100,
+      interval  = 900
       shouldAdjust = false
 
   // periodically trigger the need for an update
@@ -16,7 +16,7 @@ var MouseTrails = function(){
                   .addClass('under_construction_mouse_sprite')
                   .css({
                     position: 'absolute',
-                    backgroundColor: '#F0'+(numLeft*2)-1
+                    backgroundColor: '#F0'+((numLeft*2)-1)
                   })
                   .html(
                     $("<span>&nbsp;</span>")
@@ -32,24 +32,33 @@ var MouseTrails = function(){
   var firstSprite = $("body > .under_construction_mouse_sprite")
 
   var adjustSprites = function(x, y, sprite){
-    if(!sprite)
+    var top, left
+
+    if(typeof sprite == 'undefined'){
       sprite = firstSprite
+      top  = y
+      left = x
+    }else{
+      top  = offsetY
+      left = offsetX
+    }
 
     sprite
       .css({
-        top:  y+'px',
-        left: x+'px'
+        top:  top+'px',
+        left: left+'px'
       })
-      .find("span")
-        .html("x: "+x+", y: "+y)
+      // .find("span")
+      //   .html("x: "+left+", y: "+top)
 
     // delay setting the next sprite location
     setTimeout(function(){
-      if(sprite[0].firstChild){
+      var child = sprite.find(".under_construction_mouse_sprite:first")
+      if(child.length){
         adjustSprites(
-          x + offsetX+20,
-          y + offsetY+30,
-          $(sprite[0].firstChild)
+          x + offsetX,
+          y + offsetY,
+          child
         )
       }
     }, delay)
