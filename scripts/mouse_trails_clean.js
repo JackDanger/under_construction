@@ -1,4 +1,3 @@
-console.log("HELL")
 var MouseTrails = function(){
   var spriteCount = 5
   var offsetX = 10,
@@ -11,7 +10,7 @@ var MouseTrails = function(){
                   .addClass('under_construction_mouse_sprite')
                   .css({
                     position: 'absolute',
-                    backgroundColor: '#F0'+(numLeft*2)
+                    backgroundColor: '#F0'+(numLeft*2)-1
                   })
                   .html(
                     $("<span>&nbsp;</span>")
@@ -37,8 +36,7 @@ var MouseTrails = function(){
       })
       .find("span")
         .html("x: "+x+", y: "+y)
-    debug(sprite.css('top'))
-    
+
     if(sprite[0].firstChild){
       adjustSprites(
         x + offsetX+20,
